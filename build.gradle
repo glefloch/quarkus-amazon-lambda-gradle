@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+
+}
+
+repositories {
+     mavenLocal()
+     mavenCentral()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    // remove if not using jaxrs
+    implementation "io.quarkus:quarkus-resteasy"
+    // remove if not using servlets
+    implementation "io.quarkus:quarkus-undertow"
+    // remove if not using vertx web
+    implementation "io.quarkus:quarkus-vertx-web"
+    // remove if not using funqy
+    implementation "io.quarkus:quarkus-funqy-http"
+
+    implementation "io.quarkus:quarkus-amazon-lambda-http"
+
+    testImplementation "io.quarkus:quarkus-junit5"
+    testImplementation "io.rest-assured:rest-assured"
+
+}
+
+group 'com.example'
+version '0.1.0-SNAPSHOT'
+
+quarkusBuild {
+ logging.captureStandardOutput LogLevel.INFO
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
